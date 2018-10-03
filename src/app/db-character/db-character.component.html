@@ -1,0 +1,12 @@
+<p>
+  db-character works!
+</p>
+<pre> {{characters | json }} </pre>
+
+<div *ngFor="let character of characters">
+  <div>{{character.name}}</div>
+  <div>{{character.description}}</div>
+  <div>{{character.isCool}}</div>
+</div>
+
+<button (click)="addCharacter('Tien', 'Has kick ass Tri Beam Attack', true)">Add Tien</button>
