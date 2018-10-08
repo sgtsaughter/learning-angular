@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router'; 
-import { TodoListComponent } from './todo-list/todo-list.component';
-import { DbCharacterComponent } from './db-character/db-character.component';
+import { TodoListComponent } from './components/todo-list/todo-list.component';
+import { DbCharacterComponent } from './components/db-character/db-character.component';
 
 const routes: Routes = [
 
