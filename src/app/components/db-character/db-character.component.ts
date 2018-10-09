@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 
-import { CharacterService } from '../../character.service';
+import { CharacterService } from '../../services/character.service';
 import { Character } from '../../character.model';
 import { FilterPipe } from 'ngx-filter-pipe';
 

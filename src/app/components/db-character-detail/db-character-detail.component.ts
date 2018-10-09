@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import {Router} from '@angular/router';
 
-import { CharacterService } from '../../character.service';
+import { CharacterService } from '../../services/character.service';
 import { Character } from '../../character.model';
 
 @Component({
