@@ -1,52 +1,66 @@
-<input type="text" [(ngModel)]="characterFilter.name" placeholder="Type to filter by name">
+<div class="container">
 
-<div class="row card-group">
-    <div class="col-md-4" *ngFor="let character of characters | filterBy: characterFilter"> 
-    <div class="card" style="width: 18rem;">
-      <img class="card-img-top" src="http://localhost:4000/{{character.characterImage}}" alt="Card image cap">
-      <div class="card-body">
-        <h5 class="card-title">{{character.name}}</h5>
-        <p class="card-text">{{character.description}}</p>
-        <a routerLink="/db-character/{{character._id}}" class="btn btn-primary">Edit</a>
-        <a (click)="deleteCharacter(character._id)" class="btn btn-primary">Delete</a>
+  <div class="row form-group">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+        <input class="form-control" type="text" [(ngModel)]="characterFilter.name" placeholder="Search for your chracter's name">
+        <div *ngIf="(characters | filterBy: characterFilter).length === 0">
+            There are no characters by that name.  Why don't you add one?!
+        </div>
+    </div>
+  </div>
+
+  <div class="row form-group card-group">
+      <div class="col-md-4" *ngFor="let character of characters | filterBy: characterFilter"> 
+      <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="http://localhost:4000/{{character.characterImage}}" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">{{character.name}}</h5>
+          <p class="card-text">{{character.description}}</p>
+          <a routerLink="/db-character/{{character._id}}" class="btn btn-primary margin-right-10">Edit</a>
+          <a (click)="deleteCharacter(character._id)" class="btn btn-primary">Delete</a>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<div *ngIf="(characters | filterBy: characterFilter).length === 0">
-  There are no characters by that name.  Why don't you add one?!
-</div>
+  <div class="row">
+    <div class="col-md-12">
+      <h4>Add a new character</h4>
+        <form>
+            <div class="form-group">
+                <label for="characterName">Character Name:</label>
+                <input [(ngModel)] = "characterName" id="characterName" type="text" name="Name" class="form-control">
+            </div>
+            
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <input [(ngModel)] = "description" type="text" id="description" name="Name" class="form-control">
+            </div>
+            
+            <div class="form-group form-check">
+                <div>Is this character cool?:</div>
+                <div class="form-check form-check-inline">
+                    <input  [(ngModel)] = "isCool" type="radio" class="form-check-input" id="true" value="true" name="Is this character cool" checked />
+                    <label class="form-check-label" for="true">Yes</label>
+                </div>
 
-
-
-<form>
-    <div>
-      <pre>{{ characterName }}</pre>
-        <label>Character Name:</label>
-        <input [(ngModel)] = "characterName" type="text" name="Name">
-    </div>
-    
-    <div>
-        <pre>{{ description }}</pre>
-        <label>Description:</label>
-        <input [(ngModel)] = "description" type="text" name="Name">
-    </div>
-    
-    <div>
-        <pre>{{ isCool }}</pre>
-        <label>Is this character cool?:</label>
-        <input  [(ngModel)] = "isCool" type="radio" id="true" value="true" name="Is this character cool" checked />
-        <label for="true">Yes</label>
+                <div class="form-check form-check-inline">
+                    <input [(ngModel)] = "isCool" type="radio" class="form-check-input" id="false" value="false" name="Is this character cool" />
+                    <label class="form-check-label" for="false">No</label>
+                </div>
+            </div>
         
-        <input [(ngModel)] = "isCool" type="radio" id="false" value="false" name="Is this character cool" />
-        <label for="false">No</label>
-    </div>
+            <div class="custom-file">
+              <input class="custom-file-input" type="file" (change)="onFileSelected($event)">
+              <label class="custom-file-label">Character Image</label>
+            </div>
 
-    <div>
-      <label>Character Image</label>
-      <input type="file" (change)="onFileSelected($event)">
+            <div class="form-group margin-top-10">
+                <button class="btn btn-success" (click)="addCharacter(characterName, description, isCool)">Add Character</button>
+            </div>
+            
+        </form>
     </div>
-    
-    <button (click)="addCharacter(characterName, description, isCool)">Add Character</button>
-</form>
+  </div>
+
+</div>
