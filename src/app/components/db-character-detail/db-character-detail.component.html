@@ -1,3 +1,4 @@
+<pre>{{characterDetail | json }}</pre>
 <h1>{{characterDetail.name}}'s Detail Page</h1>
 <div class="row">
   <div class="col-md-6">
@@ -6,6 +7,8 @@
         <div class="card-body">
           <h5 class="card-title">{{characterDetail.name}}</h5>
           <p class="card-text">{{characterDetail.description}}</p>
+          <p *ngIf="characterDetail.isCool" class="card-text">This guy is cool</p>
+          <p *ngIf="!characterDetail.isCool" class="card-text">This guy sucks</p>
           <a href="#" class="btn btn-primary">Delete</a>
         </div>
       </div>
@@ -13,24 +16,24 @@
   <div class="col-md-6">
       <form>
           <div>
-            <pre>{{ characterName }}</pre>
+            <pre>{{ characterDetail.name }}</pre>
               <label>Character Name:</label>
-              <input [(ngModel)] = "characterName" type="text" name="Name">
+              <input [(ngModel)] = "characterDetail.name" type="text" name="Name">
           </div>
           
           <div>
-              <pre>{{ description }}</pre>
+              <pre>{{ characterDetail.description }}</pre>
               <label>Description:</label>
-              <input [(ngModel)] = "description" type="text" name="Name">
+              <input [(ngModel)] = "characterDetail.description" type="text" name="description">
           </div>
           
           <div>
-              <pre>{{ isCool }}</pre>
+              <pre>{{ characterDetail.isCool }}</pre>
               <label>Is this character cool?:</label>
-              <input  [(ngModel)] = "isCool" type="radio" id="true" value="true" name="Is this character cool" checked />
+              <input  [(ngModel)] = "characterDetail.isCool" type="radio" id="true" value="true" name="Is this character cool" checked />
               <label for="true">Yes</label>
               
-              <input [(ngModel)] = "isCool" type="radio" id="false" value="false" name="Is this character cool" />
+              <input [(ngModel)] = "characterDetail.isCool" type="radio" id="false" value="false" name="Is this character cool" />
               <label for="false">No</label>
           </div>
       
@@ -39,7 +42,7 @@
             <input type="file" (change)="onFileSelected($event)">
           </div>
           
-          <button (click)="updateDetails(characterName, description, isCool)">Submit Changes</button>
+          <button (click)="updateDetails(characterDetail.name, characterDetail.description, characterDetail.isCool)">Submit Changes</button>
       </form>
       
   </div>

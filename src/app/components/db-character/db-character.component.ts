@@ -42,6 +42,7 @@ export class DbCharacterComponent implements OnInit {
     this.characterService.deleteCharacter(id).subscribe(() => {
       //Upate the list of chracters again after deleted. 
       this.fetchCharacters();
+      console.log('character deleted');
     });
   }
 
