@@ -11,6 +11,9 @@ let Characters = new Schema({
     },
     isCool: {
         type: Boolean
+    },
+    characterImage: {
+        type: String
     }
 });
 

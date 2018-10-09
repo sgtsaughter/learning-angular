@@ -7,6 +7,10 @@
   <div>{{character.name}}</div>
   <div>{{character.description}}</div>
   <div>{{character.isCool}}</div>
+  <div>{{character.characterImage}}</div>
+  <div>
+    <img src="http://localhost:4000/{{character.characterImage}}" alt="">
+  </div>
 </div>
 
 
@@ -31,6 +35,11 @@
         
         <input [(ngModel)] = "isCool" type="radio" id="false" value="false" name="Is this character cool" />
         <label for="false">No</label>
+    </div>
+
+    <div>
+      <label>Character Image</label>
+      <input type="file" (change)="onFileSelected($event)">
     </div>
     
     <button (click)="addCharacter(characterName, description, isCool)">Add Character</button>

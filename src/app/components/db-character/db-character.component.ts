@@ -11,6 +11,7 @@ import { Character } from '../../character.model';
 export class DbCharacterComponent implements OnInit {
 
   characters: Character[];
+  selectedFile = null;  
 
   constructor(private characterService: CharacterService) { }
 
@@ -18,9 +19,9 @@ export class DbCharacterComponent implements OnInit {
     this.fetchCharacters();
   }
 
-  addCharacter(name, description, isCool) {
+  addCharacter(name, description, isCool, characterImage) {
     this.characterService
-    .addCharacter(name, description, isCool)
+    .addCharacter(name, description, isCool, this.selectedFile)
     .subscribe(() => {
       console.log('character has been created');
       this.fetchCharacters();
@@ -42,6 +43,14 @@ export class DbCharacterComponent implements OnInit {
       //Upate the list of chracters again after deleted. 
       this.fetchCharacters();
     });
+  }
+
+  onFileSelected(event) {
+    console.log(event);
+    //Always pick the first file if we ever add functionality to add multiple files, we can't use the first item in the array. 
+    this.selectedFile = <File>event.target.files[0];
+    console.log(this.selectedFile);
+    
   }
 
 }

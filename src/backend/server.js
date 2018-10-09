@@ -2,11 +2,39 @@ import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
+import multer from 'multer';
 
 import Characters from './models/characters';
 
 const app = express();
 const router = express.Router();
+
+const storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null, 'uploads/');
+    },
+    filename: function(req, file, cb) {
+        cb(null, file.originalname);
+    }
+});
+
+//Add some type of filter for the files
+// const fileFilter = (req, file, cb) => {
+//     if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+//         //store the file
+//         cb(null, true);
+//     }
+//     else {
+//         //reject the file. Replace null with a callback function to respond with an error. This will simply not write the image to the file system. 
+//         cb(null, false);
+//     }
+// };
+
+const upload = multer({
+    storage: storage,
+    fileSize: 1024 * 1024 * 25,
+    //fileFilter: fileFilter
+})
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -43,14 +71,20 @@ router.route('/getCharacters/:id').get((req, res) => {
     });
 });
 
-router.route('/saveCharacters').post((req, res) => {
-    let character = new Characters(req.body);
+router.route('/saveCharacters').post(upload.single('characterImage'), (req, res) => {
+    console.log(req.file);    
+    let character = new Characters({
+        name: req.body.name,
+        description: req.body.description,
+        isCool: req.body.isCool,
+        characterImage: req.file.path
+    });
     character.save()
         .then(character => {
             res.status(200).json({'chracter': 'Added sucessfully'});
         })
         .catch(err => {
-            res.status(400).send('Failed to createnew record');
+            res.status(400).send('Failed to add new character');
         });
 });
 
@@ -83,4 +117,6 @@ router.route('/deleteCharacter/:id').get((req, res) => {
 })
 
 app.use('/', router);
+//make uploads folder public
+app.use('/uploads', express.static('uploads'))
 app.listen(4000, () => console.log('Express server running on port 4000'));
