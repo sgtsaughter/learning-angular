@@ -1,6 +1,14 @@
 <h1>Test App</h1>
-<nav>
-  <a routerLink="/todo-list">To Do List</a>
-  <a routerLink="/dbz">Dragon Ball</a>
-</nav>
+
+
+
+<ul class="nav nav-pills">
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/dbz" routerLinkActive="active" href="#">Dragon Ball</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/todo-list"  routerLinkActive="active" href="#">To Do List</a>
+    </li>
+</ul>
+
 <router-outlet></router-outlet> 
