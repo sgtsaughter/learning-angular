@@ -88,7 +88,8 @@ router.route('/saveCharacters').post(upload.single('characterImage'), (req, res)
         });
 });
 
-router.route('updateCharacter/:id').post((req, res) => {
+router.route('/updateCharacter/:id').post(upload.single('characterImage'), (req, res) => {
+    console.log(req.file);  
     Characters.findById(req.params.id, (err, character) => {
         if (!character) {
             return nextTick( new Error('Could not load document'));
@@ -97,6 +98,7 @@ router.route('updateCharacter/:id').post((req, res) => {
             character.name = req.body.name;
             character.description = req.body.description;
             character.isCool = req.body.isCool;
+            character.characterImage = req.file.path;
 
             character.save().then(character => {
                 res.json('Update done');

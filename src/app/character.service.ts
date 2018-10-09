@@ -14,7 +14,7 @@ export class CharacterService {
     return this.http.get(`${this.uri}/getCharacters`);
   }
 
-  getIssueById(id) {
+  getCharacterById(id) {
     return this.http.get(`${this.uri}/getCharacters/${id}`);
   }
 
@@ -28,12 +28,13 @@ export class CharacterService {
     return this.http.post(`${this.uri}/saveCharacters`, character);
   }
 
-  updateCharacter(id, name, description, isCool) {
-    const character = {
-      name: name,
-      description: description,
-      isCool: isCool
-    };
+  updateCharacter(id, name, description, isCool, characterImage) {
+    const character = new FormData();
+    character.append('id', id);
+    character.append('name', name);
+    character.append('description', description);
+    character.append('isCool', isCool);
+    character.append('characterImage', characterImage, characterImage.name);
     
     return this.http.post(`${this.uri}/updateCharacter/${id}`, character);
   }
