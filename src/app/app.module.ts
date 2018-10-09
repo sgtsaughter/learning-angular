@@ -12,6 +12,7 @@ import { CharacterService } from './character.service';
 import { DbCharacterDetailComponent } from './components/db-character-detail/db-character-detail.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { FilterPipeModule } from 'ngx-filter-pipe';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { ToastrModule } from 'ngx-toastr';
     HttpClientModule, 
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
+    FilterPipeModule,
   ],
   providers: [CharacterService],
   bootstrap: [AppComponent]

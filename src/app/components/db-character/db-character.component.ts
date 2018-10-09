@@ -3,6 +3,7 @@ import { ToastrService } from 'ngx-toastr';
 
 import { CharacterService } from '../../character.service';
 import { Character } from '../../character.model';
+import { FilterPipe } from 'ngx-filter-pipe';
 
 @Component({
   selector: 'app-db-character',
@@ -13,8 +14,9 @@ export class DbCharacterComponent implements OnInit {
 
   characters: Character[];
   selectedFile = null;  
+  characterFilter: any = { name: '' };
 
-  constructor(private characterService: CharacterService, private toastr: ToastrService) { }
+  constructor(private characterService: CharacterService, private toastr: ToastrService, private filterPipe: FilterPipe) { }
 
   ngOnInit() {
     this.fetchCharacters();

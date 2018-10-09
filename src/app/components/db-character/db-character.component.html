@@ -1,5 +1,7 @@
+<input type="text" [(ngModel)]="characterFilter.name" placeholder="Type to filter by name">
+
 <div class="row card-group">
-    <div class="col-md-4" *ngFor="let character of characters"> 
+    <div class="col-md-4" *ngFor="let character of characters | filterBy: characterFilter"> 
     <div class="card" style="width: 18rem;">
       <img class="card-img-top" src="http://localhost:4000/{{character.characterImage}}" alt="Card image cap">
       <div class="card-body">
@@ -10,6 +12,10 @@
       </div>
     </div>
   </div>
+</div>
+
+<div *ngIf="(characters | filterBy: characterFilter).length === 0">
+  There are no characters by that name.  Why don't you add one?!
 </div>
 
 
