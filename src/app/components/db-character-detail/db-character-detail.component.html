@@ -9,7 +9,7 @@
           <p class="card-text">{{characterDetail.description}}</p>
           <p *ngIf="characterDetail.isCool" class="card-text">This guy is cool</p>
           <p *ngIf="!characterDetail.isCool" class="card-text">This guy sucks</p>
-          <a href="#" class="btn btn-primary">Delete</a>
+          <a (click)="deleteCharacter(characterDetail._id)" class="btn btn-primary">Delete</a>
         </div>
       </div>
   </div>

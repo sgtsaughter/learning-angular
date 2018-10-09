@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 
 import { CharacterService } from '../../character.service';
 import { Character } from '../../character.model';
@@ -13,7 +14,7 @@ export class DbCharacterComponent implements OnInit {
   characters: Character[];
   selectedFile = null;  
 
-  constructor(private characterService: CharacterService) { }
+  constructor(private characterService: CharacterService, private toastr: ToastrService) { }
 
   ngOnInit() {
     this.fetchCharacters();
@@ -25,6 +26,8 @@ export class DbCharacterComponent implements OnInit {
     .subscribe(() => {
       console.log('character has been created');
       this.fetchCharacters();
+      this.toastr.success('Your New Character Has Been Added');
+      
     })
   }
 
@@ -43,6 +46,7 @@ export class DbCharacterComponent implements OnInit {
       //Upate the list of chracters again after deleted. 
       this.fetchCharacters();
       console.log('character deleted');
+      this.toastr.info('Your Character Has Been Deleted');
     });
   }
 

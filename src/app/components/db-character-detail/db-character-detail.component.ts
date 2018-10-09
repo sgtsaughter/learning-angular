@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import {Router} from '@angular/router';
 
 import { CharacterService } from '../../character.service';
 import { Character } from '../../character.model';
@@ -11,11 +13,12 @@ import { Character } from '../../character.model';
 })
 export class DbCharacterDetailComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute, private characterService: CharacterService) { }
+  constructor(private route: ActivatedRoute, private characterService: CharacterService, private toastr: ToastrService, private router: Router) { }
 
   characterID = null;
   characterDetail: Character[];
   selectedFile = null;
+  
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -50,7 +53,18 @@ export class DbCharacterDetailComponent implements OnInit {
     .subscribe(() => {
       console.log('character has been updated');
       this.getCharacter(this.characterID);
+      this.toastr.info('Your Character Has Been Updated');
     })
+  }
+
+  deleteCharacter(id) {
+    this.characterService.deleteCharacter(id).subscribe(() => {
+      //Upate the list of chracters again after deleted. 
+      this.getCharacter(this.characterID);
+      console.log('character deleted');
+      this.router.navigate(['dbz']); 
+      this.toastr.info('Your Character Has Been Deleted');
+    });
   }
 
 }
