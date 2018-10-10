@@ -11,7 +11,7 @@
 
   <div class="row form-group card-group">
       <div class="col-md-4" *ngFor="let character of characters | filterBy: characterFilter"> 
-      <div class="card" style="width: 18rem;">
+      <div class="card margin-bottom-10" style="width: 18rem;">
         <img class="card-img-top" src="http://localhost:4000/{{character.characterImage}}" alt="Card image cap">
         <div class="card-body">
           <h5 class="card-title">{{character.name}}</h5>
