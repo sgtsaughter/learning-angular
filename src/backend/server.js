@@ -3,12 +3,17 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import multer from 'multer';
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 
 import Characters from './models/characters';
+import User from './models/user';
+
 
 const app = express();
 const router = express.Router();
 
+//Image upload infomration 
 const storage = multer.diskStorage({
     destination: function(req, file, cb) {
         cb(null, 'uploads/');
@@ -115,6 +120,90 @@ router.route('/deleteCharacter/:id').get((req, res) => {
             res.json(err);
         else
             res.json('Remove successfully');
+    })
+})
+
+//User signup and login
+router.route('/signup').post((req, res, next) => {
+    User.find({email:req.body.email})
+    .exec()
+    .then(user => {
+        if (user.length >= 1) {
+            return res.status(409).json({
+                message: "Email already Exists"
+            });
+        } else {
+            bcrypt.hash(req.body.password, 10, (err, hash) => {
+                if(err) {
+                    return res.status(500).json({
+                        error: err
+                    })
+                } else {
+                    const user = new User({
+                        email: req.body.email,
+                        password: hash,
+                    });
+                    user.save()
+                    .then(result => {
+                        console.log(result);
+                        res.status(201).json({
+                            message: 'User created'
+                        });
+                    })
+                    .catch(err => {
+                        console.log(err);
+                        res.status(400).send('Failed to sign up a new user');
+                    });
+                }
+            })
+        }
+    })
+});
+
+router.route('/deleteUser/:id').get((req, res) => {
+    User.findByIdAndRemove({_id: req.params.id}, (err, user) => {
+        if (err)
+            res.json(err);
+        else
+            res.json('User Deleted Successfully');
+    })
+})
+
+router.route('/login').post((req, res, next) => {
+    User.find({email: req.body.email})
+    .exec()
+    .then(user => {
+        if(user.length < 1) {
+            return res.status(401).json({
+                message: "Auth Failed"
+            });
+        }
+        bcrypt.compare(req.body.password, user[0].password, (err, result) => {
+            if (err) {
+                return res.status(401).json({
+                    message: "Auth Failed"
+                });
+            }
+            //Note: the "secret" here should be replaced with a private key on a server if this application was ever put into production
+            if(result) {
+                const token = jwt.sign({
+                    email: user[0],
+                    userId: user[0]._id
+                    }, 
+                    "secret",
+                    {
+                        expiresIn: "1h"
+                    },
+                );
+                return res.status(200).json({
+                    message: 'Auth Sucessful',
+                    token: token
+                });
+            }
+            res.status(401).json({
+                message: 'Auth Failed'
+            })
+        })
     })
 })
 
