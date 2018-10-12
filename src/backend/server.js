@@ -171,18 +171,19 @@ router.route('/deleteUser/:id').get((req, res) => {
 })
 
 router.route('/login').post((req, res, next) => {
+    console.log(req.body);
     User.find({email: req.body.email})
     .exec()
     .then(user => {
         if(user.length < 1) {
             return res.status(401).json({
-                message: "Auth Failed"
+                message: "Auth Failed 1"
             });
         }
         bcrypt.compare(req.body.password, user[0].password, (err, result) => {
             if (err) {
                 return res.status(401).json({
-                    message: "Auth Failed"
+                    message: "Auth Failed 2"
                 });
             }
             //Note: the "secret" here should be replaced with a private key on a server if this application was ever put into production
@@ -202,7 +203,7 @@ router.route('/login').post((req, res, next) => {
                 });
             }
             res.status(401).json({
-                message: 'Auth Failed'
+                message: 'Auth Failed 3'
             })
         })
     })

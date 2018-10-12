@@ -27,9 +27,10 @@ export class LoginService {
   }
 
   loginUser(email, password) {
-    const user = new FormData();
-    user.append('email', email);
-    user.append('password', password);
+    const user = {
+      "email": email,
+      "password": password,
+    }
 
     return this.http.post(`${this.uri}/login`, user);
   }

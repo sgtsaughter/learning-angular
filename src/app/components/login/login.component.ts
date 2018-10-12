@@ -30,6 +30,17 @@ export class LoginComponent implements OnInit {
       console.log('user has been created');
       this.toastr.success('Your New User Has Been Added');
       
+    });
+  }
+
+  login(email,password) {
+    this.loginService
+    .loginUser(email, password)
+    .subscribe((response) => {
+      console.log(response);
+      //TODO: only set the token.  Currently setting the entire response obj as 'token' in localstorage
+      localStorage.setItem('token', JSON.stringify(response));
+      this.toastr.success('You have been logged in');
     })
   }
 }
