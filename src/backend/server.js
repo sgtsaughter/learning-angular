@@ -77,7 +77,8 @@ router.route('/getCharacters/:id').get((req, res) => {
 });
 
 router.route('/saveCharacters').post(upload.single('characterImage'), (req, res) => {
-    console.log(req.file);    
+    //console.log(req.file);    
+    console.log(req.body);
     let character = new Characters({
         name: req.body.name,
         description: req.body.description,
@@ -124,7 +125,7 @@ router.route('/deleteCharacter/:id').get((req, res) => {
 })
 
 //User signup and login
-router.route('/signup').post((req, res, next) => {
+router.route('/signup').post((req, res) => {
     User.find({email:req.body.email})
     .exec()
     .then(user => {

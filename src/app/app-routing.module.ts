@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { TodoListComponent } from './components/todo-list/todo-list.component';
 import { DbCharacterComponent } from './components/db-character/db-character.component';
 import { DbCharacterDetailComponent } from './components/db-character-detail/db-character-detail.component';
+import {LoginComponent} from './components/login/login.component';
 
 const routes: Routes = [
 
@@ -25,9 +26,12 @@ const routes: Routes = [
   {
     path: 'db-character/:id',
     component: DbCharacterDetailComponent
+  },
+
+  {
+    path: 'signup',
+    component: LoginComponent
   }
-
-
 
 ]
 
