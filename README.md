@@ -35,6 +35,44 @@ Run `mongod`
 cd into backend directory where server.js lives
 Run `npm run dev`
 
+##Installation 
+
+Clone the repo 
+```
+git clone git@github.com:sgtsaughter/learning-angular.git
+```
+
+cd into root directory and run 
+
+```
+npm install
+```
+
+Download and install mongodb 
+https://www.mongodb.com/download-center?initial=true#community
+
+This next part is optional.  If you want a visual tool for mongoDB that will let you easily view, create, delete, databases and database tables download and install Robo 3T
+https://robomongo.org/
+
+Run the frontend application: 
+Run `ng serve --open`
+
+Run the backend applicaiton: 
+Run `npm run dev`
+
+Run the database server:
+Run `mongod`
+
+Configuring the database in Robo 3T: 
+
+Open the Robo 3T application 
+
+Find the ip and port that the database server is running on by reading the output of your console after you ran the `mongodb` command (Probably will be localhost:27017)
+
+Click File -> Connect
+
+
+
 ## TODO:
 Reorganize the directory structure better (eg. Add all components to a components folder, add serivces directory, etc.)  
 Make sure app still runs after directory reorganization
@@ -42,3 +80,6 @@ Make sure app still runs after directory reorganization
 Add installation guide for MEAN stack 
 
 Figure out what this app will do 
+
+Add a links to vidoes and articles used as learning references to help build this app.
+

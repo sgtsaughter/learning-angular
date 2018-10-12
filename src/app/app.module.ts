@@ -13,13 +13,15 @@ import { DbCharacterDetailComponent } from './components/db-character-detail/db-
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { FilterPipeModule } from 'ngx-filter-pipe';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TodoListComponent,
     DbCharacterComponent,
-    DbCharacterDetailComponent
+    DbCharacterDetailComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
