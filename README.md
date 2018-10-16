@@ -83,3 +83,5 @@ Figure out what this app will do
 
 Add a links to vidoes and articles used as learning references to help build this app.
 
+Added authentication using login token. Try to impliment functionality from here https://medium.com/@amcdnl/authentication-in-angular-jwt-c1067495c5e0
+
