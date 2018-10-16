@@ -13,7 +13,7 @@ import { User } from '../../user.model';
 })
 export class LoginComponent implements OnInit {
 
-  user: User[];
+  user: User;
 
   constructor(private route: ActivatedRoute, 
               private toastr: ToastrService, 
@@ -36,10 +36,10 @@ export class LoginComponent implements OnInit {
   login(email,password) {
     this.loginService
     .loginUser(email, password)
-    .subscribe((response) => {
-      console.log(response);
-      //TODO: only set the token.  Currently setting the entire response obj as 'token' in localstorage
-      localStorage.setItem('token', JSON.stringify(response));
+    .subscribe((data: User) => {
+      this.user = data;
+      console.log(this.user);
+      localStorage.setItem('token', JSON.stringify(this.user.token));
       this.toastr.success('You have been logged in');
     })
   }
