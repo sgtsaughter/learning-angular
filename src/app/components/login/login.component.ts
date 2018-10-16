@@ -23,14 +23,22 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
+  /* TODO: Add a page where the user can delete themselves, or other users...maybe a user profile page.  
+  Something so we can use the deleteUser API call */
+
   addUser(email, password) {
     this.loginService
     .addUser(email, password)
-    .subscribe(() => {
-      console.log('user has been created');
-      this.toastr.success('Your New User Has Been Added');
-      
-    });
+    .subscribe( 
+      (data) => {
+        this.toastr.success('Your New User Has Been Added')
+        console.log(data);
+      },
+      (error) => {
+        this.toastr.error(error.error.message)
+        console.log(error);
+      }  
+    );
   }
 
   login(email,password) {
@@ -40,7 +48,12 @@ export class LoginComponent implements OnInit {
       this.user = data;
       console.log(this.user);
       localStorage.setItem('token', JSON.stringify(this.user.token));
-      this.toastr.success('You have been logged in');
-    })
+      this.toastr.success(this.user.message);
+    },
+    (error) => {
+      this.toastr.error(error.error.message)
+      console.log(error);
+    }
+  )
   }
 }

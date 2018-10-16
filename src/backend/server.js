@@ -198,7 +198,7 @@ router.route('/login').post((req, res, next) => {
                     },
                 );
                 return res.status(200).json({
-                    message: 'Auth Sucessful',
+                    message: 'Login Successful',
                     token: token
                 });
             }
