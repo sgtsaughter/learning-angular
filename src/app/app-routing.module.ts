@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router'; 
+import { RouterModule, Routes } from '@angular/router';
 import { TodoListComponent } from './components/todo-list/todo-list.component';
 import { DbCharacterComponent } from './components/db-character/db-character.component';
 import { DbCharacterDetailComponent } from './components/db-character-detail/db-character-detail.component';
-import {LoginComponent} from './components/login/login.component';
+import { LoginComponent } from './components/login/login.component';
+import { AuthGuard } from './services/auth.guard';
+
 
 const routes: Routes = [
 
@@ -15,7 +17,8 @@ const routes: Routes = [
 
   {
     path: 'todo-list',
-    component: TodoListComponent
+    component: TodoListComponent,
+    canActivate: [AuthGuard]
   },
 
   {

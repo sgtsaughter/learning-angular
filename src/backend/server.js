@@ -15,10 +15,10 @@ const router = express.Router();
 
 //Image upload infomration 
 const storage = multer.diskStorage({
-    destination: function(req, file, cb) {
+    destination: function (req, file, cb) {
         cb(null, 'uploads/');
     },
-    filename: function(req, file, cb) {
+    filename: function (req, file, cb) {
         cb(null, file.originalname);
     }
 });
@@ -87,7 +87,7 @@ router.route('/saveCharacters').post(upload.single('characterImage'), (req, res)
     });
     character.save()
         .then(character => {
-            res.status(200).json({'chracter': 'Added sucessfully'});
+            res.status(200).json({ 'chracter': 'Added sucessfully' });
         })
         .catch(err => {
             res.status(400).send('Failed to add new character');
@@ -95,10 +95,10 @@ router.route('/saveCharacters').post(upload.single('characterImage'), (req, res)
 });
 
 router.route('/updateCharacter/:id').post(upload.single('characterImage'), (req, res) => {
-    console.log(req.file);  
+    console.log(req.file);
     Characters.findById(req.params.id, (err, character) => {
         if (!character) {
-            return nextTick( new Error('Could not load document'));
+            return nextTick(new Error('Could not load document'));
         }
         else {
             character.name = req.body.name;
@@ -116,7 +116,7 @@ router.route('/updateCharacter/:id').post(upload.single('characterImage'), (req,
 });
 
 router.route('/deleteCharacter/:id').get((req, res) => {
-    Characters.findByIdAndRemove({_id: req.params.id}, (err, character) => {
+    Characters.findByIdAndRemove({ _id: req.params.id }, (err, character) => {
         if (err)
             res.json(err);
         else
@@ -126,43 +126,43 @@ router.route('/deleteCharacter/:id').get((req, res) => {
 
 //User signup and login
 router.route('/signup').post((req, res) => {
-    User.find({email:req.body.email})
-    .exec()
-    .then(user => {
-        if (user.length >= 1) {
-            return res.status(409).json({
-                message: "Email already Exists"
-            });
-        } else {
-            bcrypt.hash(req.body.password, 10, (err, hash) => {
-                if(err) {
-                    return res.status(500).json({
-                        error: err
-                    })
-                } else {
-                    const user = new User({
-                        email: req.body.email,
-                        password: hash,
-                    });
-                    user.save()
-                    .then(result => {
-                        console.log(result);
-                        res.status(201).json({
-                            message: 'User created'
+    User.find({ email: req.body.email })
+        .exec()
+        .then(user => {
+            if (user.length >= 1) {
+                return res.status(409).json({
+                    message: "Email already Exists"
+                });
+            } else {
+                bcrypt.hash(req.body.password, 10, (err, hash) => {
+                    if (err) {
+                        return res.status(500).json({
+                            error: err
+                        })
+                    } else {
+                        const user = new User({
+                            email: req.body.email,
+                            password: hash,
                         });
-                    })
-                    .catch(err => {
-                        console.log(err);
-                        res.status(400).send('Failed to sign up a new user');
-                    });
-                }
-            })
-        }
-    })
+                        user.save()
+                            .then(result => {
+                                console.log(result);
+                                res.status(201).json({
+                                    message: 'User created'
+                                });
+                            })
+                            .catch(err => {
+                                console.log(err);
+                                res.status(400).send('Failed to sign up a new user');
+                            });
+                    }
+                })
+            }
+        })
 });
 
 router.route('/deleteUser/:id').get((req, res) => {
-    User.findByIdAndRemove({_id: req.params.id}, (err, user) => {
+    User.findByIdAndRemove({ _id: req.params.id }, (err, user) => {
         if (err)
             res.json(err);
         else
@@ -172,41 +172,41 @@ router.route('/deleteUser/:id').get((req, res) => {
 
 router.route('/login').post((req, res, next) => {
     console.log(req.body);
-    User.find({email: req.body.email})
-    .exec()
-    .then(user => {
-        if(user.length < 1) {
-            return res.status(401).json({
-                message: "Auth Failed 1"
-            });
-        }
-        bcrypt.compare(req.body.password, user[0].password, (err, result) => {
-            if (err) {
+    User.find({ email: req.body.email })
+        .exec()
+        .then(user => {
+            if (user.length < 1) {
                 return res.status(401).json({
-                    message: "Auth Failed 2"
+                    message: "Auth Failed 1"
                 });
             }
-            //Note: the "secret" here should be replaced with a private key on a server if this application was ever put into production
-            if(result) {
-                const token = jwt.sign({
-                    email: user[0],
-                    userId: user[0]._id
-                    }, 
-                    "secret",
-                    {
-                        expiresIn: "1h"
+            bcrypt.compare(req.body.password, user[0].password, (err, result) => {
+                if (err) {
+                    return res.status(401).json({
+                        message: "Auth Failed 2"
+                    });
+                }
+                //Note: the "secret" here should be replaced with a private key on a server if this application was ever put into production
+                if (result) {
+                    const token = jwt.sign({
+                        email: user[0],
+                        userId: user[0]._id
                     },
-                );
-                return res.status(200).json({
-                    message: 'Login Successful',
-                    token: token
-                });
-            }
-            res.status(401).json({
-                message: 'Auth Failed 3'
+                        "secret",
+                        {
+                            expiresIn: '1h'
+                        },
+                    );
+                    return res.status(200).json({
+                        message: 'Login Successful',
+                        token: token
+                    });
+                }
+                res.status(401).json({
+                    message: 'Auth Failed 3'
+                })
             })
         })
-    })
 })
 
 app.use('/', router);
