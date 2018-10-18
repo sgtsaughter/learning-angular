@@ -83,5 +83,7 @@ Figure out what this app will do
 
 Add a links to vidoes and articles used as learning references to help build this app.
 
-Added authentication using login token. Try to impliment functionality from here https://medium.com/@amcdnl/authentication-in-angular-jwt-c1067495c5e0
+Add websocket features.  Make auto update content feature to db-character page, so that when one user is viewing that page, and another user creates a new character, it will automatically display on the first user's page.  
 
+Or make this awesome chat feature if it's easy to impliment. 
+https://medium.com/dailyjs/real-time-apps-with-typescript-integrating-web-sockets-node-angular-e2b57cbd1ec1
