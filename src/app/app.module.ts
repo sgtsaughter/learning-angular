@@ -16,6 +16,8 @@ import { FilterPipeModule } from 'ngx-filter-pipe';
 import { LoginComponent } from './components/login/login.component';
 import { AuthGuard } from './services/auth.guard';
 import { AuthService } from './services/auth.services';
+import { ChatComponent } from './components/chat/chat.component';
+import { SocketService } from './services/socket.service';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,8 @@ import { AuthService } from './services/auth.services';
     TodoListComponent,
     DbCharacterComponent,
     DbCharacterDetailComponent,
-    LoginComponent
+    LoginComponent,
+    ChatComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +37,7 @@ import { AuthService } from './services/auth.services';
     ToastrModule.forRoot(),
     FilterPipeModule,
   ],
-  providers: [CharacterService, AuthGuard, AuthService],
+  providers: [CharacterService, AuthGuard, AuthService, SocketService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

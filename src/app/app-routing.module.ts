@@ -5,6 +5,7 @@ import { DbCharacterComponent } from './components/db-character/db-character.com
 import { DbCharacterDetailComponent } from './components/db-character-detail/db-character-detail.component';
 import { LoginComponent } from './components/login/login.component';
 import { AuthGuard } from './services/auth.guard';
+import { ChatComponent } from 'src/app/components/chat/chat.component';
 
 
 const routes: Routes = [
@@ -34,6 +35,11 @@ const routes: Routes = [
   {
     path: 'signup',
     component: LoginComponent
+  },
+
+  {
+    path: 'chat',
+    component: ChatComponent
   }
 
 ]

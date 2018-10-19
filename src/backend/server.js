@@ -13,6 +13,11 @@ import User from './models/user';
 const app = express();
 const router = express.Router();
 
+//chat variables
+const port = 4000;
+const server = require('http').Server(app);
+const io = require('socket.io')(server);
+
 //Image upload infomration 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -209,7 +214,24 @@ router.route('/login').post((req, res, next) => {
         })
 })
 
+//Chat api call 
+io.on('connection', (socket) => {
+    console.log('new connection made');
+  
+     // Test Messages
+    socket.on('send-message', (data) => {
+      console.log(data.text);
+      io.emit('message-received', data);
+    });
+  
+  });
+
 app.use('/', router);
 //make uploads folder public
 app.use('/uploads', express.static('uploads'))
-app.listen(4000, () => console.log('Express server running on port 4000'));
+//app.listen(4000, () => console.log('Express server running on port 4000'));
+
+server.listen(port, () => {
+    console.log("Listening on port " + port);
+  });
+  
