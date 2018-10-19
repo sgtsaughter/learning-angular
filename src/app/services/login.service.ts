@@ -8,9 +8,15 @@ export class LoginService {
 
   uri = 'http://localhost:4000';
 
-  constructor(private http: HttpClient) {  }
+  constructor(private http: HttpClient) { }
 
-  addUser(email, password) {
+  addUser(
+    email,
+    password,
+    username,
+    gender,
+    newsletter,
+  ) {
     //TODO: Find out why when sending data using FormData() the request returns and empty obj 
     //but doesn't return an empty obj when using the other character api calls 
 
@@ -21,8 +27,11 @@ export class LoginService {
     const user = {
       "email": email,
       "password": password,
+      "username": username,
+      "gender": gender,
+      "newsletter": newsletter,
     }
-    
+
     return this.http.post(`${this.uri}/signup`, user);
   }
 

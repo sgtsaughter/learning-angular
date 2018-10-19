@@ -1,30 +1,77 @@
 <div class="container">
     <div class="row">
-        <div class="col-md-12">
-          <h4>Add a new user or login</h4>
-          <p>
-              We're using this form for either signing up or loggin in. If you try to register a user that already exists you'll receive an error
-          </p>
-            <form>
+        <div class="col-md-6 signup">
+            <h4>Add a new user or login</h4>
+            <p>
+                We're using this form for either signing up or loggin in. If you try to register a user that already
+                exists you'll receive an error
+            </p>
+            <form name="signUpForm">
                 <div class="form-group">
                     <label for="email">Email Address:</label>
-                    <input [(ngModel)] = "email" id="email" type="text" name="Name" class="form-control">
+                    <input [(ngModel)]="signUpEmail" id="email" type="text" name="Name" class="form-control">
                 </div>
-                
+
                 <div class="form-group">
                     <label for="password">Password:</label>
-                    <input [(ngModel)] = "password" type="password" id="password" name="Name" class="form-control">
+                    <input [(ngModel)]="signUpPassword" type="password" id="password" name="Password" class="form-control">
                 </div>
-      
-                <div class="form-group margin-top-10">
-                    <button class="btn btn-success" (click)="addUser(email, password)">Add User</button>
+
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input [(ngModel)]="signUpUsername" type="username" id="username" name="Username" class="form-control">
                 </div>
-      
+
+                <div class="form-group">
+                    <label for="gender">Gender:</label>
+                    <select name="Gender" id="gender" [(ngModel)]="selectedGender" required>
+                        <option *ngFor="let g of gender" [value]="g">{{g}}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <div>Sign up for our Newsletter?</div>
+                    <div class="form-check form-check-inline">
+                        <input [(ngModel)]="newsletter" type="radio" class="form-check-input" id="true" value="true"
+                            name="sign up for newsletter" checked />
+                        <label class="form-check-label" for="true">Yes</label>
+                    </div>
+
+                    <div class="form-check form-check-inline">
+                        <input [(ngModel)]="newsletter" type="radio" class="form-check-input" id="false" value="false"
+                            name="sign up for newsletter" />
+                        <label class="form-check-label" for="false">No</label>
+                    </div>
+                </div>
+
+                <!-- <div class="custom-file">
+                    <input class="custom-file-input" type="file" (change)="onFileSelected($event)">
+                    <label class="custom-file-label">Avatar Image</label>
+                </div> -->
+
                 <div class="form-group margin-top-10">
-                  <button class="btn btn-success" (click)="login(email, password)">Login</button>
-              </div>
-                
+                    <button class="btn btn-success" (click)="addUser(signUpEmail, signUpPassword, signUpUsername, selectedGender, newsletter )">Add
+                        User</button>
+                </div>
             </form>
         </div>
-      </div>
+        <div class="col-md-6 login">
+            <h4>Login</h4>
+            <form name="loginForm">
+                <div class="form-group">
+                    <label for="email">Email Address:</label>
+                    <input [(ngModel)]="loginEmail" id="email" type="text" name="Name" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input [(ngModel)]="loginPassword" type="password" id="password" name="Name" class="form-control">
+                </div>
+
+                <div class="form-group margin-top-10">
+                    <button class="btn btn-success" (click)="login(loginEmail, loginPassword)">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>

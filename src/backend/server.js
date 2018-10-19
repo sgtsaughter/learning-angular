@@ -148,6 +148,9 @@ router.route('/signup').post((req, res) => {
                         const user = new User({
                             email: req.body.email,
                             password: hash,
+                            username: req.body.username,
+                            gender: req.body.gender,
+                            newsletter: req.body.newsletter
                         });
                         user.save()
                             .then(result => {
@@ -217,14 +220,14 @@ router.route('/login').post((req, res, next) => {
 //Chat api call 
 io.on('connection', (socket) => {
     console.log('new connection made');
-  
-     // Test Messages
+
+    // Test Messages
     socket.on('send-message', (data) => {
-      console.log(data.text);
-      io.emit('message-received', data);
+        console.log(data.text);
+        io.emit('message-received', data);
     });
-  
-  });
+
+});
 
 app.use('/', router);
 //make uploads folder public
@@ -233,5 +236,4 @@ app.use('/uploads', express.static('uploads'))
 
 server.listen(port, () => {
     console.log("Listening on port " + port);
-  });
-  
+});

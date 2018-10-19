@@ -8,7 +8,7 @@ export class CharacterService {
 
   uri = 'http://localhost:4000';
 
-  constructor(private http: HttpClient) {  }
+  constructor(private http: HttpClient) { }
 
   getCharacters() {
     return this.http.get(`${this.uri}/getCharacters`);
@@ -24,7 +24,9 @@ export class CharacterService {
     character.append('description', description);
     character.append('isCool', isCool);
     character.append('characterImage', characterImage, characterImage.name);
-    
+
+    console.log(character);
+
     return this.http.post(`${this.uri}/saveCharacters`, character);
   }
 
@@ -35,7 +37,7 @@ export class CharacterService {
     character.append('description', description);
     character.append('isCool', isCool);
     character.append('characterImage', characterImage, characterImage.name);
-    
+
     return this.http.post(`${this.uri}/updateCharacter/${id}`, character);
   }
 

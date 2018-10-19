@@ -12,6 +12,16 @@ let User = new Schema({
         type: String,
         required: true,
     },
+    username: {
+        type: String,
+        required: true,
+    },
+    gender: {
+        type: String,
+    },
+    newsletter: {
+        type: Boolean, //hi
+    }
 });
 
 export default mongoose.model('User', User);

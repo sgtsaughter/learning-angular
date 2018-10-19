@@ -14,6 +14,10 @@ import { User } from '../../user.model';
 export class LoginComponent implements OnInit {
   returnUrl: string;
   user: User;
+  selectedFile = null;
+  gender = ["Male", "Female", "Non-Binary", "Other"];
+
+
 
   constructor(
     private route: ActivatedRoute,
@@ -28,9 +32,9 @@ export class LoginComponent implements OnInit {
   /* TODO: Add a page where the user can delete themselves, or other users...maybe a user profile page.  
   Something so we can use the deleteUser API call */
 
-  addUser(email, password) {
+  addUser(email, password, username, gender, newsletter) {
     this.loginService
-      .addUser(email, password)
+      .addUser(email, password, username, gender, newsletter)
       .subscribe(
         (data) => {
           this.toastr.success('Your New User Has Been Added')
@@ -58,5 +62,13 @@ export class LoginComponent implements OnInit {
           console.log(error);
         }
       )
+  }
+
+  onFileSelected(event) {
+    console.log(event);
+    //Always pick the first file if we ever add functionality to add multiple files, we can't use the first item in the array. 
+    this.selectedFile = <File>event.target.files[0];
+    console.log(this.selectedFile);
+
   }
 }

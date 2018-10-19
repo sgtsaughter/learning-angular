@@ -1,0 +1,11 @@
+.login {
+    border-left: 2px solid grey
+}
+
+select {
+    margin-left: 1rem;
+}
+
+.custom-file {
+    margin-bottom: 1rem;
+}
