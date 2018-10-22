@@ -4,6 +4,7 @@ export interface User {
     username: string;
     gender: string;
     newsletter: boolean;
+    userImage: string;
     token: string;
     message: string;
 }

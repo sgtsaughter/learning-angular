@@ -32,9 +32,9 @@ export class LoginComponent implements OnInit {
   /* TODO: Add a page where the user can delete themselves, or other users...maybe a user profile page.  
   Something so we can use the deleteUser API call */
 
-  addUser(email, password, username, gender, newsletter) {
+  addUser(email, password, username, gender, newsletter, userImage) {
     this.loginService
-      .addUser(email, password, username, gender, newsletter)
+      .addUser(email, password, username, gender, newsletter, this.selectedFile)
       .subscribe(
         (data) => {
           this.toastr.success('Your New User Has Been Added')
@@ -56,6 +56,7 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('token', JSON.stringify(this.user.token));
         this.router.navigateByUrl(this.returnUrl);
         this.toastr.success(this.user.message);
+        console.log(this.loginService.getUserDetails());
       },
         (error) => {
           this.toastr.error(error.error.message)

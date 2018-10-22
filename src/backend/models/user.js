@@ -20,7 +20,10 @@ let User = new Schema({
         type: String,
     },
     newsletter: {
-        type: Boolean, //hi
+        type: Boolean, 
+    },
+    userImage: {
+        type: String,
     }
 });
 
