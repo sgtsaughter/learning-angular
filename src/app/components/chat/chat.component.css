@@ -124,3 +124,7 @@
   .chat-msg.chat-msg-sent time {
     float: right;
   }
+
+  .chat-msg .profile {
+    height: 50px;
+  }
