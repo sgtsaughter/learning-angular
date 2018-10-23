@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { LoginService } from '../../services/login.service';
+import { User } from '../../user.model';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'todo-list';
+
+  user: User;
+
+  constructor(private loginService: LoginService) { }
+
+  title = 'Angular Sandbox';
+
+
+  tokenInfo = this.loginService.getUserDetails();
+    
+
 }

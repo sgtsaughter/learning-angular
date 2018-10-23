@@ -39,6 +39,8 @@ export class LoginComponent implements OnInit {
         (data) => {
           this.toastr.success('Your New User Has Been Added')
           console.log(data);
+          this.login(email, password);
+          this.toastr.success('You have now been logged in');
         },
         (error) => {
           this.toastr.error(error.error.message)
