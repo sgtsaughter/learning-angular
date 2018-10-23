@@ -71,6 +71,60 @@ Find the ip and port that the database server is running on by reading the outpu
 
 Click File -> Connect
 
+##Mobile App
+Steps to make this web application an android mobile application for the first time.  
+
+Download and install cordova 
+
+Run `npm install -g cordova` 
+note: you may have to run `sudo npm install -g cordova`
+
+In the root of the app run `cordova create mobile`
+
+A new directory will be created called mobile.  Go into that directory and delete a folder called www. Then create a new directory called www and create symlink between www and the dist folder. Do this by running the following commands
+
+`cd mobile`
+
+`rm -rf www`
+
+`ln -s ../dist www`
+
+This will update the www with any changes in the dist folder.  Whenever we make changes to the web application we'll need to run 
+
+`npm build` 
+
+to have these changes also apply to the mobile app. 
+
+In the www/index.html file, update the  base tag by changing the href from "/" to "./" because for the mobile app this will no longer be taken from the root directory.  It will be in a sub directory on an android device
+
+In the mobile directory, 
+
+Run `cordova platform add android`
+This will add all cordova plugins for android adk. 
+
+In the mobile/config.xml change 
+
+`<content src="/index.html" />`
+
+to
+
+`<content src="/todo-list/index.html" />`
+
+Connect your phone to your computer (make sure you have Developer Options enabled on
+your android device) and run 
+
+`cordova run android`
+
+This should build and launch the app on your phone. 
+
+## Mobile Development Workflow (After initial setup)
+Make changes to the application 
+
+Run `npm build`
+
+Attach your phone via USB
+
+Run `cordova run android`
 
 
 ## TODO:
