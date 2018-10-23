@@ -50,7 +50,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 //URL to mongo db
-mongoose.connect('mongodb://localhost:27017/characters');
+mongoose.connect('mongodb://192.168.1.161:27017/characters');
 
 const connection = mongoose.connection;
 

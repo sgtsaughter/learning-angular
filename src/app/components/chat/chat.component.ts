@@ -57,7 +57,7 @@ export class ChatComponent implements OnInit {
     const message = {
       text: botMessage,
       date: Date.now(),
-      imageUrl: '/src/app/images/chewbacca_icon.png',
+      imageUrl: '../images/chewbacca_icon.png',
       isBot: true
     };
     

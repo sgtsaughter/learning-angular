@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class CharacterService {
 
-  uri = 'http://localhost:4000';
+  uri = 'http://192.168.1.161:4000';
 
   constructor(private http: HttpClient) { }
 

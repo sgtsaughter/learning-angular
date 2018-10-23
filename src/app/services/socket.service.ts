@@ -6,7 +6,7 @@ export class SocketService {
   socket: SocketIOClient.Socket;
 
   constructor() {
-    this.socket = io('http://localhost:4000');
+    this.socket = io('http://192.168.1.161:4000');
   }
 
   on(eventName: any, callback: any) {
