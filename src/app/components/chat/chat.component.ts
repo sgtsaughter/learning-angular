@@ -14,17 +14,15 @@ export class ChatComponent implements OnInit {
   selfAuthored: boolean = false;
   botMessage: string;
 
-
   constructor(private _socketService: SocketService) { }
 
   ngOnInit() {
     this.messages = new Array();
-    
-        this._socketService.on('message-received', (msg: any) => {
-          this.messages.push(msg);
-          console.log(msg);
-          console.log(this.messages);
-        });
+    this._socketService.on('message-received', (msg: any) => {
+      this.messages.push(msg);
+      console.log(msg);
+      console.log(this.messages);
+    });
   }
 
   sendMessage() {
@@ -60,7 +58,7 @@ export class ChatComponent implements OnInit {
       imageUrl: '/src/app/images/chewbacca_icon.png',
       isBot: true
     };
-    
+
     console.log(message);
     //Set a timeout to give the illusion that the bot is taking time to think of a response. 
     setTimeout(() => {

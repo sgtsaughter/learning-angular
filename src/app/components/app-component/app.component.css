@@ -1,0 +1,12 @@
+nav {
+    height: 30px;
+    background-color: #b3c9f3bf;
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+}
+
+nav img {
+    height: 30px;
+    margin-left: 10px;
+}

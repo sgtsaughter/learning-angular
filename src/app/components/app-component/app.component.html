@@ -1,11 +1,14 @@
 <div class="container">
   <div class="form-group">
     <h1>DB Character App</h1>
-    <pre>
-      {{tokenInfo | json}}
-    </pre>
-    <div>{{tokenInfo.username}}</div>
-    <div>{{tokenInfo.gender}}</div> 
+
+    <pre>{{local | json}}</pre>
+
+    <nav *ngIf="isLoggedIn">
+      <div>Hello: {{tokenInfo.username}}</div>
+      <img src="http://localhost:4000/{{tokenInfo.userImage}}" alt="user-avatar">
+    </nav>
+
     <ul class="nav nav-pills">
       <li class="nav-item">
         <a class="nav-link" routerLink="/dbz" routerLinkActive="active" href="#">Dragon Ball</a>

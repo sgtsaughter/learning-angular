@@ -26,7 +26,7 @@ import { SocketService } from './services/socket.service';
     DbCharacterComponent,
     DbCharacterDetailComponent,
     LoginComponent,
-    ChatComponent
+    ChatComponent,
   ],
   imports: [
     BrowserModule,

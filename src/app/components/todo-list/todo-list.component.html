@@ -1,20 +1,22 @@
-<ul *ngIf="todoList.length > 0">
-  <li *ngFor="let item of todoList">{{item}}</li>
-</ul>
+<section>
+  <ul *ngIf="todoList.length > 0">
+    <li *ngFor="let item of todoList">{{item}}</li>
+  </ul>
 
-<h4 *ngIf="todoList.length == 0">Please add some items to the TO Do list</h4>
+  <h4 *ngIf="todoList.length == 0">Please add some items to the TO Do list</h4>
 
-<form name="todo-List">
-  
-  <div>
-    <label>Enter an item for the To Do list </label>
-    <input name="enterTodoItem" [(ngModel)] = "todoListItem">
-  </div>
+  <form name="todo-List">
 
-  <input type="submit" value="add" (click)="add(todoListItem); todoListItem=''">
+    <div>
+      <label>Enter an item for the To Do list </label>
+      <input name="enterTodoItem" [(ngModel)]="todoListItem">
+    </div>
 
-</form>
+    <input type="submit" value="add" (click)="add(todoListItem); todoListItem=''">
 
-<button (click)="clear();">
-  clear
-</button>
+  </form>
+
+  <button (click)="clear();">
+    clear
+  </button>
+</section>
