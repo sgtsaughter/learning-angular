@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 // import { truncate } from 'fs';
-// import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +9,7 @@ export class LoginService {
 
   uri = 'http://localhost:4000';
 
-  constructor(private http: HttpClient,/* private storageSub = new Subject()*/) { }
+  constructor(private http: HttpClient) { }
 
   addUser(email, password, username, gender, newsletter, userImage) {
     //TODO: Find out why when sending data using FormData() the request returns and empty obj 

@@ -11,17 +11,25 @@ export class AppComponent implements OnInit {
   user: User;
 
   constructor(private loginService: LoginService) { }
-
   ngOnInit() {
-    /* this.loginService.watchStorage().subscribe((data: string) => {
-      let local = data;
-      console.log(local);
-    }); */
+
+  }
+
+  logOut() {
+    localStorage.removeItem('token');
+  }
+
+  public checkLoggedIn(): boolean {
+    const userDetails = this.loginService.getUserDetails();
+    if (userDetails) {
+      return userDetails.exp > Date.now() / 1000;
+    } else {
+      return false;
+    }
   }
 
   title = 'Angular Sandbox';
 
   tokenInfo = this.loginService.getUserDetails();
 
-  // isLoggedIn = this.loginService.isLoggedIn();
 }

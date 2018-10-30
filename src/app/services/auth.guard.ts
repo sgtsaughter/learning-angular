@@ -19,7 +19,7 @@ export class AuthGuard implements CanActivate {
 
         this.router.navigate(['/signup']);
         this.toastr.info('You must sign up/login to view this page');
-
+        
         return false;
     }
 

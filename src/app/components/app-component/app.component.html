@@ -2,9 +2,12 @@
   <div class="form-group">
     <h1>DB Character App</h1>
 
-    <pre>{{local | json}}</pre>
+    <pre>{{isLoggedIn | json}}</pre>
+    <pre>{{tokenInfo | json }}</pre>
+    <pre>{{user | json }}</pre>
 
-    <nav *ngIf="isLoggedIn">
+    <nav *ngIf="checkLoggedIn()">
+      <button class="pull-left" (click)="logOut()">Log Out</button>
       <div>Hello: {{tokenInfo.username}}</div>
       <img src="http://localhost:4000/{{tokenInfo.userImage}}" alt="user-avatar">
     </nav>
