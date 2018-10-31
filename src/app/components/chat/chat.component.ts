@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SocketService } from '../../services/socket.service';
 import * as _ from "lodash";
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-chat',
@@ -14,8 +15,9 @@ export class ChatComponent implements OnInit {
   selfAuthored: boolean = false;
   botMessage: string;
 
-  constructor(private _socketService: SocketService) { }
-
+  constructor(private _socketService: SocketService, private loginService: LoginService) { }
+  currentUser = this.loginService.getUserDetails();
+  
   ngOnInit() {
     this.messages = new Array();
     this._socketService.on('message-received', (msg: any) => {
@@ -29,7 +31,7 @@ export class ChatComponent implements OnInit {
     const message = {
       text: this.messageText,
       date: Date.now(),
-      imageUrl: this.avatar,
+      imageUrl: 'http://localhost:4000/' + this.currentUser.userImage,
       isBot: false
     };
     console.log(message);

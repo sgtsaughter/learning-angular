@@ -18,6 +18,8 @@
                       <div class="col-md-12 col-xs-12">
                           <div class="chat-msg"
                                   [ngClass]="{'chat-msg-sent': selfAuthored, 'chat-msg-recieved': !selfAuthored}">
+                              <div *ngIf="!message.isBot">{{currentUser.username}}</div>
+                              <div *ngIf="message.isBot">ChewBOTcca</div>
                               <img *ngIf="message.imageUrl"
                                         class="profile"
                                         [ngClass]="{'pull-right': selfAuthored, 'pull-left': !selfAuthored}"
