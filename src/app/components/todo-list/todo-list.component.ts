@@ -1,18 +1,19 @@
-import { Component, OnInit } from '@angular/core';
-import { todoListItem } from '../../todoList';
+import { Component, OnInit } from "@angular/core";
+import { todoListItem } from "../../todoList";
+import { moveItemInArray, CdkDragDrop } from "@angular/cdk/drag-drop";
 
 @Component({
-  selector: 'app-todo-list',
-  templateUrl: './todo-list.component.html',
-  styleUrls: ['./todo-list.component.css']
+  selector: "app-todo-list",
+  templateUrl: "./todo-list.component.html",
+  styleUrls: ["./todo-list.component.css"]
 })
 export class TodoListComponent implements OnInit {
   vm = this;
 
-  todoList = new Array();
+  todoList = [];
 
-  add(name:string) {
-    if(name !=="") {
+  add(name: string) {
+    if (name !== "") {
       this.todoList.push(name);
       console.log(this.todoList);
     }
@@ -22,10 +23,11 @@ export class TodoListComponent implements OnInit {
     this.todoList = [];
   }
 
-
-  constructor() { }
-  
-  ngOnInit() {
+  onDrop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.todoList, event.previousIndex, event.currentIndex);
   }
 
+  constructor() {}
+
+  ngOnInit() {}
 }

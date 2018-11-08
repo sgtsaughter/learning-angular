@@ -1,7 +1,17 @@
 <section>
-  <ul *ngIf="todoList.length > 0">
-    <li *ngFor="let item of todoList">{{item}}</li>
-  </ul>
+  <div class="example-list" cdkDropList *ngIf="todoList.length > 0" (cdkDropListDropped)="onDrop($event)">
+    <div class="example-box" *ngFor="let item of todoList" cdkDrag>{{item}}</div>
+  </div>
+
+  <!-- <cdk-drop (dropped)="onDrop($event)">
+    <div *ngFor="let item of items" cdkDrag>{{item}}</div>
+  </cdk-drop> -->
+
+  <div cdkDrag>
+    <p>Drop items here</p>
+  </div>
+
+
 
   <h4 *ngIf="todoList.length == 0">Please add some items to the TO Do list</h4>
 
