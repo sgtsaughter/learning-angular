@@ -19,6 +19,8 @@ import { AuthService } from "./services/auth.services";
 import { ChatComponent } from "./components/chat/chat.component";
 import { SocketService } from "./services/socket.service";
 import { DragDropModule } from "@angular/cdk/drag-drop";
+import { WeatherComponent } from './components/weather/weather.component';
+import { WeatherService } from './services/weather.service';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,8 @@ import { DragDropModule } from "@angular/cdk/drag-drop";
     DbCharacterComponent,
     DbCharacterDetailComponent,
     LoginComponent,
-    ChatComponent
+    ChatComponent,
+    WeatherComponent
   ],
   imports: [
     BrowserModule,

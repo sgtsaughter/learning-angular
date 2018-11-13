@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../../services/login.service';
 import { User } from '../../user.model';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-root',

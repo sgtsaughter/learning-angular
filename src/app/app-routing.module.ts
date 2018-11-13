@@ -6,6 +6,7 @@ import { DbCharacterDetailComponent } from './components/db-character-detail/db-
 import { LoginComponent } from './components/login/login.component';
 import { AuthGuard } from './services/auth.guard';
 import { ChatComponent } from 'src/app/components/chat/chat.component';
+import { WeatherComponent } from 'src/app/components/weather/weather.component';
 
 
 const routes: Routes = [
@@ -40,6 +41,11 @@ const routes: Routes = [
   {
     path: 'chat',
     component: ChatComponent
+  },
+
+  {
+    path: 'weather',
+    component: WeatherComponent
   }
 
 ]
