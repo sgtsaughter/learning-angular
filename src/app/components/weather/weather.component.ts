@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { WeatherService } from '../../services/weather.service';
 import { Chart } from 'chart.js';
-import * as moment from 'moment';
+import * as moment from 'moment-timezone';
 
 
 
@@ -19,18 +19,18 @@ export class WeatherComponent implements OnInit {
   ngOnInit() {
     this.weater.dailyForecast()
     .subscribe(res => {
-      res['list'] = res['list'].slice(1,9);
+      //res['list'] = res['list'].slice(2,11);
       let temp_max = res['list'].map(res => res.main.temp_max);
       let temp_min = res['list'].map(res => res.main.temp_min);
       let temp = res['list'].map(res => res.main.temp);
-      let alldates = res['list'].map(res => res.dt_txt)
+      let alldates = res['list'].map(res => res.dt)
 
       console.log(res);
       console.log(alldates);
       
       let weatherDates = []
       alldates.forEach((res) => {
-          weatherDates.push(moment(res).format('MMM Do YYYY, h:mm a'))
+          weatherDates.push(moment(res * 1000).tz("America/New_York").format('MMM Do YYYY, h:mm a'));
       })
 
       console.log(weatherDates);
