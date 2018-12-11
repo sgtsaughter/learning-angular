@@ -13,6 +13,7 @@ import * as moment from 'moment-timezone';
 export class WeatherComponent implements OnInit {
 
   chart = [];
+  donut = [];
 
   constructor(private weater: WeatherService) { }
 
@@ -79,6 +80,29 @@ export class WeatherComponent implements OnInit {
       });
       
     });
+    
+    //Donut Chart
+    this.donut = new Chart ('donut', {
+      type: 'doughnut',
+        data: {
+          datasets: [{
+            data: [60, 40],
+            backgroundColor: ['red', 'blue'],
+            borderWidth: 0,
+          }],
+          labels: ['test1', 'test2'],
+        },
+        options: {
+          legend: {
+            display: false,
+          },
+          responsive:true,
+          cutoutPercentage: 80
+
+
+        }
+    });
+
   }
 
 }
